@@ -40,7 +40,7 @@ Created and enabled a virtual host configuration file:
 sudo nano /etc/apache2/sites-available/projectlamp.conf
 
 <VirtualHost *:80>
-    ServerAdmin admin@example.com
+    ServerAdmin projectlamp
     DocumentRoot /var/www/projectlamp/
     ServerName projectlamp.local
     ErrorLog ${APACHE_LOG_DIR}/error.log
