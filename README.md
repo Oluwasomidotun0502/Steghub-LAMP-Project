@@ -74,3 +74,17 @@ Screenshots
 <img width="1920" height="1080" alt="EC2 INSTANCE" src="https://github.com/user-attachments/assets/7f8239fd-704e-42b7-a7e9-abbe908884a3" />
 <img width="1920" height="1080" alt="Apache2 Page" src="https://github.com/user-attachments/assets/d6493ad2-c3b7-49b9-a456-77887801a6ae" />
 <img width="1920" height="1080" alt="INSTANCE LAUNCH" src="https://github.com/user-attachments/assets/f49e86c3-c682-4616-a1bd-17bf4799b461" />
+
+**Self-Study Documents**
+
+The following documents were referenced to build knowledge on LAMP stack and Linux commands:
+
+LAMP Basics
+ – Overview of Linux, Apache, MySQL, PHP and their roles in web development.
+
+Linux Commands Reference
+ – Cheat sheet of essential Linux commands used in this project.
+
+** References / Resources**
+Personal self-study materials
+LAMP Stack tutorials and documentation
