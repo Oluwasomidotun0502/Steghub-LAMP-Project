@@ -8,7 +8,8 @@ Challenges I faced included:
 
 - **SSH access issues:** Needed to correctly set the `.pem` key path to connect.  
 - **File permission problems:** Had to adjust ownership and permissions for Apache to serve files.  
-- **Virtual host configuration:** Understanding how to create, enable, and reload the virtual host.  
+- **Virtual host configuration:** Understanding how to create, enable, and reload the virtual host.
+ 
 - **Editing files in terminal:** Learning to edit, save, and exit files in `nano`/`vi`.
 
 ## Implementation
@@ -48,8 +49,8 @@ Adjusted permissions:
 sudo chown -R www-data:www-data /var/www/projectlamp
 sudo chmod -R 755 /var/www/projectlamp
 
-Accessed website in browser:
 
+Accessed website in browser:
 URL: http://54.91.184.36/projectlamp/info.php
 Confirmed PHP is running and the virtual host works.
 
@@ -70,6 +71,6 @@ Screenshots
 <img width="1920" height="1080" alt="InfoPHP" src="https://github.com/user-attachments/assets/c65c0e38-a5c0-4772-9dea-b2f55618780a" />
 <img width="1920" height="1080" alt="Home LAMP" src="https://github.com/user-attachments/assets/75c81cf7-e30f-42db-9792-f8f79f2d77e6" />
 <img width="1920" height="1080" alt="EC2 SYSTEM INFO" src="https://github.com/user-attachments/assets/20fada45-6caa-4b90-bd2f-ba2ca9e2b7a9" />
-![EC2 INSTANCE](https://github.com/user-attachments/assets/350c8b39-0786-4d31-a44a-56eb056d39b1)
+<img width="1920" height="1080" alt="EC2 INSTANCE" src="https://github.com/user-attachments/assets/7f8239fd-704e-42b7-a7e9-abbe908884a3" />
 <img width="1920" height="1080" alt="Apache2 Page" src="https://github.com/user-attachments/assets/d6493ad2-c3b7-49b9-a456-77887801a6ae" />
 <img width="1920" height="1080" alt="INSTANCE LAUNCH" src="https://github.com/user-attachments/assets/f49e86c3-c682-4616-a1bd-17bf4799b461" />
