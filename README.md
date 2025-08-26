@@ -1,25 +1,29 @@
-# Steghub LAMP Stack on AWS EC2
+Steghub LAMP Stack on AWS EC2
+
 LAMP stack project on AWS EC2 with virtual host and PHP
 
-## Challenge
-This project involved setting up a **LAMP stack (Linux, Apache, MySQL, PHP)** on an **AWS EC2 instance** and creating a **virtual host** to host a simple website.
+Challenge
+
+This project involved setting up a LAMP stack (Linux, Apache, MySQL, PHP) on an AWS EC2 instance and creating a virtual host to host a simple website.
 
 Challenges I faced included:
 
-- **SSH access issues:** Needed to correctly set the `.pem` key path to connect.  
-- **File permission problems:** Had to adjust ownership and permissions for Apache to serve files.  
-- **Virtual host configuration:** Understanding how to create, enable, and reload the virtual host.
- 
-- **Editing files in terminal:** Learning to edit, save, and exit files in `nano`/`vi`.
+SSH access issues: Needed to correctly set the .pem key path to connect.
 
-## Implementation
+File permission problems: Had to adjust ownership and permissions for Apache to serve files.
+
+Virtual host configuration: Understanding how to create, enable, and reload the virtual host.
+
+Editing files in terminal: Learning to edit, save, and exit files in nano/vi.
+
+Implementation
+
 Step-by-step actions I performed:
 
-**Set up EC2 instance** and configured SSH access with `.pem` key.  
+Set up EC2 instance and configured SSH access with .pem key.
 
-**Installed LAMP stack:**
+Installed LAMP stack:
 
-```bash
 sudo apt update
 sudo apt install apache2 mysql-server php libapache2-mod-php php-mysql
 sudo systemctl status apache2
@@ -35,12 +39,9 @@ sudo a2dissite 000-default.conf
 sudo systemctl reload apache2
 
 Created test files
-
 index.html for testing the virtual host.
-
 info.php to display PHP info:
 
-php
 <?php
 phpinfo();
 ?>
@@ -52,16 +53,14 @@ sudo chmod -R 755 /var/www/projectlamp
 
 Accessed website in browser:
 URL: http://54.91.184.36/projectlamp/info.php
+
 Confirmed PHP is running and the virtual host works.
 
 Success
 
 LAMP stack is fully installed and operational.
-
 Apache serves files from /var/www/projectlamp.
-
 PHP files execute correctly.
-
 Successfully navigated SSH, permissions, and file editing as a beginner.
 
 Access: http://54.91.184.36/projectlamp/info.php
