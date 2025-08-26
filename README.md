@@ -1,70 +1,71 @@
-Steghub LAMP Stack on AWS EC2
+**LAMP Stack Project Report**
 
-LAMP stack project on AWS EC2 with virtual host and PHP
+**Project Overview**
+This project involved setting up a LAMP (Linux, Apache, MySQL, PHP) stack on an Ubuntu server and deploying a simple web application. The goal was to create a project directory, configure a virtual host, and verify PHP functionality.
 
-Challenge
+**Environment Setup**
+1. AWS EC2 Instance:
+Instance Type: t2.micro (free tier)
+OS: Ubuntu 20.04 LTS
+Security Group: Allowed HTTP (port 80) and SSH (port 22) traffic
+Key Pair: Used for SSH access to the instance
 
-This project involved setting up a LAMP stack (Linux, Apache, MySQL, PHP) on an AWS EC2 instance and creating a virtual host to host a simple website.
-
-Challenges I faced included:
-
-SSH access issues: Needed to correctly set the .pem key path to connect.
-
-File permission problems: Had to adjust ownership and permissions for Apache to serve files.
-
-Virtual host configuration: Understanding how to create, enable, and reload the virtual host.
-
-Editing files in terminal: Learning to edit, save, and exit files in nano/vi.
-
-Implementation
-
-Step-by-step actions I performed:
-
-Set up EC2 instance and configured SSH access with .pem key.
-
-Installed LAMP stack:
-
+2. LAMP Stack Installation:
 sudo apt update
-sudo apt install apache2 mysql-server php libapache2-mod-php php-mysql
+sudo apt install apache2
+sudo apt install mysql-server
+sudo apt install php libapache2-mod-php php-mysql
+
+3. Apache & PHP Verification
 sudo systemctl status apache2
-sudo systemctl status mysql
+Verified PHP installation
 php -v
 
-Created project directory and virtual host:
-sudo mkdir /var/www/projectlamp
-sudo chown -R $USER:$USER /var/www/projectlamp
-sudo nano /etc/apache2/sites-available/projectlamp.conf
-sudo a2ensite projectlamp.conf
-sudo a2dissite 000-default.conf
-sudo systemctl reload apache2
+**Steps Performed**
+1. Directory Setup
+Created the project directory and added web files
+sudo mkdir -p /var/www/projectlamp/
+sudo nano /var/www/projectlamp/index.html
+sudo nano /var/www/projectlamp/info.php
 
-Created test files
-index.html for testing the virtual host.
-info.php to display PHP info:
+index.html: Contains a simple HTML message
+info.php: Displays PHP info
 
 <?php
 phpinfo();
 ?>
 
-Adjusted permissions:
-sudo chown -R www-data:www-data /var/www/projectlamp
-sudo chmod -R 755 /var/www/projectlamp
+2. Virtual Host Configuration
+Created and enabled a virtual host configuration file:
+sudo nano /etc/apache2/sites-available/projectlamp.conf
 
+<VirtualHost *:80>
+    ServerAdmin admin@example.com
+    DocumentRoot /var/www/projectlamp/
+    ServerName projectlamp.local
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
 
-Accessed website in browser:
-URL: http://54.91.184.36/projectlamp/info.php
+**Enabled the site and reloaded Apache**
+sudo a2ensite projectlamp.conf
+sudo systemctl reload apache2
 
-Confirmed PHP is running and the virtual host works.
+3. Verification
+Tested the setup in a web browser:
+http://54.91.184.36/projectlamp/info.php
+Result: PHP info page displayed, confirming PHP is working correctly.
 
-Success
+4. Summary
 
-LAMP stack is fully installed and operational.
-Apache serves files from /var/www/projectlamp.
-PHP files execute correctly.
-Successfully navigated SSH, permissions, and file editing as a beginner.
+Instance: AWS EC2 t2.micro, Ubuntu 20.04 LTS
+Environment: Apache2, MySQL, PHP
+Project directory: /var/www/projectlamp/
+Virtual host: projectlamp.conf
+PHP verified via: info.php
+Publicly accessible at: http://54.91.184.36/projectlamp/info.php
 
-Access: http://54.91.184.36/projectlamp/info.php
-
+✅ Project successfully implemented. All required steps completed, and PHP is functional on the server.
 
 Screenshots
 <img width="1920" height="1080" alt="InfoPHP" src="https://github.com/user-attachments/assets/c65c0e38-a5c0-4772-9dea-b2f55618780a" />
