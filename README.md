@@ -11,34 +11,59 @@ Security Group: Allowed HTTP (port 80) and SSH (port 22) traffic
 Key Pair: Used for SSH access to the instance
 
 2. LAMP Stack Installation:
+```
 sudo apt update
+```
+```
 sudo apt install apache2
+```
+```
 sudo apt install mysql-server
+```
+```
 sudo apt install php libapache2-mod-php php-mysql
+```
 
 3. Apache & PHP Verification
+```
 sudo systemctl status apache2
+```
 Verified PHP installation
+```
 php -v
+```
 
 **Steps Performed**
+
 1. Directory Setup
+
 Created the project directory and added web files
+```
 sudo mkdir -p /var/www/projectlamp/
+```
+```
 sudo nano /var/www/projectlamp/index.html
+```
+```
 sudo nano /var/www/projectlamp/info.php
+```
 
 index.html: Contains a simple HTML message
-info.php: Displays PHP info
 
+info.php: Displays PHP info
+```
 <?php
 phpinfo();
 ?>
+```
 
 2. Virtual Host Configuration
-Created and enabled a virtual host configuration file:
-sudo nano /etc/apache2/sites-available/projectlamp.conf
 
+Created and enabled a virtual host configuration file:
+```
+sudo nano /etc/apache2/sites-available/projectlamp.conf
+```
+```
 <VirtualHost *:80>
     ServerAdmin projectlamp
     DocumentRoot /var/www/projectlamp/
@@ -46,14 +71,22 @@ sudo nano /etc/apache2/sites-available/projectlamp.conf
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
+```
 
 **Enabled the site and reloaded Apache**
+```
 sudo a2ensite projectlamp.conf
+```
+```
 sudo systemctl reload apache2
+```
 
 3. Verification
+
 Tested the setup in a web browser:
+
 http://54.91.184.36/projectlamp/info.php
+
 Result: PHP info page displayed, confirming PHP is working correctly.
 
 4. Summary
