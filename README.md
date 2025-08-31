@@ -1,16 +1,48 @@
-**LAMP Stack Project Report**
+## INTRODUCTION
+The LAMP ( Linux, Apache, MySQL, PHP ) stack is a popular open-source web development platform used to build dynamic websites and web applications. Using LAMP, developers can deploy fully functional web applications quickly, leveraging widely supported technologies.
+
+## LAMP Stack Web Application Deployment on AWS
 
 **Project Overview**
-This project involved setting up a LAMP (Linux, Apache, MySQL, PHP) stack on an Ubuntu server and deploying a simple web application. The goal was to create a project directory, configure a virtual host, and verify PHP functionality.
 
-**Environment Setup**
-1. AWS EC2 Instance:
+This project demonstrates the deployment of a web application using the LAMP stack on AWS EC2. The LAMP stack includes:
+
+Linux – Operating system for server environment.
+
+Apache – Web server to serve HTTP requests.
+
+MySQL – Relational database management system for data storage.
+
+PHP – Server-side scripting language to create dynamic web content.
+
+The main goal was to set up a fully functional web application environment in the cloud, integrating database operations with front-end interaction.
+
+## AWS Infrastructure Setup
+ **AWS EC2 Instance**
 Instance Type: t2.micro (free tier)
 OS: Ubuntu 20.04 LTS
 Security Group: Allowed HTTP (port 80) and SSH (port 22) traffic
 Key Pair: Used for SSH access to the instance
+<img width="1920" height="1080" alt="00-EC2-Instance Launch" src="https://github.com/user-attachments/assets/ca8532e4-2554-4a1e-91a6-5cfe747a7e84" />
+<img width="1920" height="1080" alt="01-EC2 Instance-Running" src="https://github.com/user-attachments/assets/cc0d7ac2-845c-49be-a288-9a7fb579f07f" />
 
-2. LAMP Stack Installation:
+## SSH Configuration
+**Connected to the instance using a private key (.pem) file**
+
+```
+ssh -i "YourKey.pem"
+ubuntu@<EC2-public-IP>
+```
+```
+sudo apt update && sudo apt upgrade -y
+```
+<img width="1920" height="1080" alt="03-Connect to Instance" src="https://github.com/user-attachments/assets/ec70921d-735a-4450-9005-3fabe876c1f3" />
+<img width="1920" height="1080" alt="SSH config" src="https://github.com/user-attachments/assets/626431a3-bf3b-4477-8103-49e57a451f4f" />
+
+
+## LAMP Stack Installation
+**Apache Web Server**
+Install Apache
 ```
 sudo apt update
 ```
@@ -18,12 +50,41 @@ sudo apt update
 sudo apt install apache2
 ```
 ```
+sudo systemctl status apache2
+```
+**Apache browser test**
+<img width="1920" height="1080" alt="05-Apache2 Page" src="https://github.com/user-attachments/assets/0940a9e5-2530-48bd-baed-a961156b63d9" />
+
+## MySQL Database
+**Installed MySQL and secured it**
+
+```
 sudo apt install mysql-server
 ```
 ```
-sudo apt install php libapache2-mod-php php-mysql
+sudo mysql
 ```
-
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+exit
+```
+```
+sudo mysql_secure_installation
+```
+```
+CREATE DATABASE myapp;
+CREATE USER 'appuser'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON myapp.* TO 'appuser'@'localhost';
+```
+```
+sudo mysql -p
+exit
+```
+## PHP Installation
+```
+sudo apt install php libapache2-mod-php php-mysql
+sudo systemctl restart apache2
+```
 3. Apache & PHP Verification
 ```
 sudo systemctl status apache2
@@ -32,23 +93,21 @@ Verified PHP installation
 ```
 php -v
 ```
+<img width="1920" height="1080" alt="Home LAMP" src="https://github.com/user-attachments/assets/4883be4a-bba0-46c6-bcec-bc36d9cd395d" />
 
-**Steps Performed**
+## Directory Setup
 
-1. Directory Setup
-
-Created the project directory and added web files
+**Created the project directory and added web files**
 ```
 sudo mkdir -p /var/www/projectlamp/
 ```
-```
-sudo nano /var/www/projectlamp/index.html
-```
-```
-sudo nano /var/www/projectlamp/info.php
-```
+**Assign ownership**
 
-index.html: Contains a simple HTML message
+```
+sudo chown -R $USER:$USER /var/www/projectlamp
+sudo chmod -R 755 /var/www/projectlamp
+```
+**index.html: Contains a simple HTML message**
 
 info.php: Displays PHP info
 ```
@@ -56,8 +115,7 @@ info.php: Displays PHP info
 phpinfo();
 ?>
 ```
-
-2. Virtual Host Configuration
+## Virtual Host Configuration
 
 Created and enabled a virtual host configuration file:
 ```
@@ -80,8 +138,9 @@ sudo a2ensite projectlamp.conf
 ```
 sudo systemctl reload apache2
 ```
+<img width="1920" height="1080" alt="InfoPHP" src="https://github.com/user-attachments/assets/1d9f68cc-e29e-427f-93c3-317bb26d36c9" />
 
-3. Verification
+## Verification
 
 Tested the setup in a web browser:
 
@@ -89,9 +148,9 @@ http://54.91.184.36/projectlamp/info.php
 
 Result: PHP info page displayed, confirming PHP is working correctly.
 
-4. Summary
+## Summary
 
-Instance: AWS EC2 t2.micro, Ubuntu 20.04 LTS
+Instance: AWS EC2 t2.micro, Ubuntu 22.04 LTS
 Environment: Apache2, MySQL, PHP
 Project directory: /var/www/projectlamp/
 Virtual host: projectlamp.conf
@@ -100,13 +159,6 @@ Publicly accessible at: http://54.91.184.36/projectlamp/info.php
 
 ✅ Project successfully implemented. All required steps completed, and PHP is functional on the server.
 
-Screenshots
-<img width="1920" height="1080" alt="InfoPHP" src="https://github.com/user-attachments/assets/c65c0e38-a5c0-4772-9dea-b2f55618780a" />
-<img width="1920" height="1080" alt="Home LAMP" src="https://github.com/user-attachments/assets/75c81cf7-e30f-42db-9792-f8f79f2d77e6" />
-<img width="1920" height="1080" alt="EC2 SYSTEM INFO" src="https://github.com/user-attachments/assets/20fada45-6caa-4b90-bd2f-ba2ca9e2b7a9" />
-<img width="1920" height="1080" alt="EC2 INSTANCE" src="https://github.com/user-attachments/assets/7f8239fd-704e-42b7-a7e9-abbe908884a3" />
-<img width="1920" height="1080" alt="Apache2 Page" src="https://github.com/user-attachments/assets/d6493ad2-c3b7-49b9-a456-77887801a6ae" />
-<img width="1920" height="1080" alt="INSTANCE LAUNCH" src="https://github.com/user-attachments/assets/f49e86c3-c682-4616-a1bd-17bf4799b461" />
 
 **Self-Study Documents**
 
